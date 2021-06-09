@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_aws_sample/auth_service.dart';
+import 'package:flutter_aws_sample/camera_flow.dart';
 import 'package:flutter_aws_sample/login_page.dart';
 import 'package:flutter_aws_sample/sign_up_page.dart';
 import 'package:flutter_aws_sample/verification_page.dart';
@@ -53,9 +54,16 @@ class _MyAppState extends State<MyApp> {
                 ),
                 
                 if (snapshot.data.authFlowStatus == AuthFlowStatus.vertification)
-                  MaterialPage(child: VerificationPage(
+                MaterialPage(
+                  child: VerificationPage(
                     didProvideVerificationCode: _authService.verifyCode,
-                  ))
+                  )
+                ),
+
+                if (snapshot.data.authFlowStatus == AuthFlowStatus.session)
+                MaterialPage(
+                  child: CameraFlow(shouldLogOut: _authService.logOut)
+                )
               ],
               onPopPage: (route, result) => route.didPop(result),
             );
@@ -67,13 +75,6 @@ class _MyAppState extends State<MyApp> {
           }
         }
       ),
-      // home: Navigator(
-      //   pages: [
-      //     MaterialPage(child: LoginPage()),
-      //     MaterialPage(child: SignUpPage())
-      //     ],
-      //   onPopPage: (route, result) => route.didPop(result),
-      // ),
     );
   }
 }
