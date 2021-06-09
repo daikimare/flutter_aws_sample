@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter_aws_sample/auth_credentials.dart';
 
 enum AuthFlowStatus { login, singup, vertification, session }
@@ -37,6 +36,11 @@ class AuthService {
 
   void verifyCode(String verificationCode) {
     final state = AuthState(authFlowStatus: AuthFlowStatus.session);
+    authStateController.add(state);
+  }
+
+  void logOut() {
+    final state = AuthState(authFlowStatus: AuthFlowStatus.login);
     authStateController.add(state);
   }
 }
