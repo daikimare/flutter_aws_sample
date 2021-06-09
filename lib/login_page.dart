@@ -1,8 +1,13 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_aws_sample/auth_credentials.dart';
 
 class LoginPage extends StatefulWidget {
+  final ValueChanged<LoginCredentials> didProvideCredentials;
+
+  final VoidCallback shouldShowSignUp;
+
+  LoginPage({Key key, this.didProvideCredentials, this.shouldShowSignUp}) : super(key: key);
+
   @override 
   State<StatefulWidget> createState() => _LoginPageState();
 }
@@ -28,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               alignment: Alignment.bottomCenter, 
               child: FlatButton(
-                onPressed: () {},
+                onPressed: widget.shouldShowSignUp,
                 child: Text('Don\'t have an account? Sign up.'),
               ),
             )
@@ -78,5 +83,8 @@ class _LoginPageState extends State<LoginPage> {
     
     print('username: $username');
     print('password: $password');
+
+    final credentials = LoginCredentials(username: username, password: password);
+    widget.didProvideCredentials(credentials);
   }
 }
