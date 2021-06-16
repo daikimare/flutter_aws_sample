@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './amplifyconfiguration.dart';
 import 'package:amplify_flutter/amplify.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:flutter_aws_sample/auth_service.dart';
 import 'package:flutter_aws_sample/camera_flow.dart';
 import 'package:flutter_aws_sample/login_page.dart';
@@ -25,8 +26,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    _authService.checkAuthStatus();
     _configureAmplify();
-    _authService.showLogin();
+    // _authService.showLogin();
   }
 
   @override
@@ -80,6 +82,9 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _configureAmplify() async {
+
+    Amplify.addPlugin(AmplifyAuthCognito());
+
     try {
       await Amplify.configure(amplifyconfig);
       print('Successfully configure Amplify 🎉 ');

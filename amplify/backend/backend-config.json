@@ -1,1 +1,10 @@
-{}
+{
+	"auth": {
+		"flutterawssample6da7961e": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}
