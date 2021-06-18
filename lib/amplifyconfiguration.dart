@@ -29,7 +29,22 @@ const amplifyconfig = ''' {
                     "Default": {
                         "authenticationFlowType": "USER_SRP_AUTH"
                     }
+                },
+                "S3TransferUtility": {
+                    "Default": {
+                        "Bucket": "flutterawssample76062497cbf04e00853ca6b9e7ab7d2175838-dev",
+                        "Region": "ap-northeast-1"
+                    }
                 }
+            }
+        }
+    },
+    "storage": {
+        "plugins": {
+            "awsS3StoragePlugin": {
+                "bucket": "flutterawssample76062497cbf04e00853ca6b9e7ab7d2175838-dev",
+                "region": "ap-northeast-1",
+                "defaultAccessLevel": "guest"
             }
         }
     }
